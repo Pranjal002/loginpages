@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loginpage/Presentation/Screens/login_page.dart';
+import 'package:loginpage/Presentation/Widgets/custom_tool_tip.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
+        designSize:  Size(375, 812),
         builder: (_, child) {
 
       return MaterialApp(
