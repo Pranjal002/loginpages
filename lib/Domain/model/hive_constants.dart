@@ -1,6 +1,6 @@
 //import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:peppaca_seller/components/constants.dart';
 
 const settingBox = "Setting";
 const categoryBox = "Category";
@@ -25,7 +25,7 @@ void boxDeleteValue(List<String> listData, Box hiveBox) {
 }
 
 void boxPrintContents(Box hiveBox) {
-  if (Constants.kDebugMode) {
+  if (kDebugMode) {
     String boxName = hiveBox.name;
     // ignore: avoid_print
     print('Contents of $boxName:');

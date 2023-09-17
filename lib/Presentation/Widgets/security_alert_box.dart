@@ -98,7 +98,7 @@ class _SecurityAlertBoxState extends State<SecurityAlertBox> {
                       ]),
                   child: TextField(
                       obscureText: true,
-                      obscuringCharacter: '*',
+                      obscuringCharacter: '●',
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,

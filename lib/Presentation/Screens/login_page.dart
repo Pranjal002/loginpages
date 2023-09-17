@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:loginpage/Domain/API/api_signin.dart';
 import 'package:loginpage/Presentation/Screens/change_password.dart';
 import 'package:loginpage/Presentation/Widgets/unsuccesful_login_alert.dart';
 
@@ -12,6 +13,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final customerID ='';
   bool _obscureText = true;
 
   void _togglePasswordVisibility() {
@@ -19,7 +21,6 @@ class _LoginPageState extends State<LoginPage> {
       _obscureText = !_obscureText;
     });
   }
-
 
   final _emailEditingController = TextEditingController();
   final _passwordEditingController = TextEditingController();
@@ -123,6 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
+                SizedBox(height: 5.h,),
                 if (!isEmailEmpty)
                   Container(
                     height: 20.h,
@@ -160,17 +162,17 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextField(
                     controller: _passwordEditingController,
                     obscureText: _obscureText,
-                    obscuringCharacter: '*',
-
+                    obscuringCharacter: '●',
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
-                        icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+                        icon: Icon(_obscureText
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,color:Colors.grey),
                         onPressed: _togglePasswordVisibility,
                       ),
                       fillColor: Colors.white,
                       filled: true,
                       hintText: 'Password',
-
                       hintStyle: TextStyle(
                         color: Color(0xFF6E6E6E),
                         fontSize: 12.sp,
@@ -202,6 +204,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
+                SizedBox(height: 5.h,),
+
                 if (!isPasswordEmpty)
                   Container(
                     height: 20.h,
@@ -249,27 +253,40 @@ class _LoginPageState extends State<LoginPage> {
                   height: 23.h,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    if (_emailEditingController.text.isEmpty) {
-                      setState(() {
-                        isEmailEmpty = false;
-                      });
-                    } else {
-                      setState(() {
-                        isEmailEmpty = true;
-                      });
+                  onTap: () async{
+                    if (_emailEditingController.text.isEmpty || _passwordEditingController.text.isEmpty) {
+                      if (_emailEditingController.text.isEmpty) {
+                        setState(() {
+                          isEmailEmpty = false;
+                        });
+                      } else {
+                        setState(() {
+                          isEmailEmpty = true;
+                        });
+                      }
+                      if (isPasswordEmpty =
+                          _passwordEditingController.text.isEmpty) {
+                        setState(() {
+                          isPasswordEmpty = false;
+                        });
+                      } else {
+                        setState(() {
+                          isPasswordEmpty = true;
+                        });
+                      }
+                    }else {
+                      print('login');
+                      // Map<String, dynamic> loginDetails= await ApiSignin().userSignIn(_emailEditingController.text, _passwordEditingController.text);
+                      // loginDetails.map((key, value) => )
+                      
+
+
+
                     }
-                    if (isPasswordEmpty =
-                        _passwordEditingController.text.isEmpty) {
-                      setState(() {
-                        isPasswordEmpty = false;
-                      });
-                    } else {
-                      setState(() {
-                        isPasswordEmpty = true;
-                      });
-                    }
-                    showDialog(context: context, builder: (BuildContext context)=>UnsuccessfulLoginAlert());
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            UnsuccessfulLoginAlert());
 
                     // if (!isEmailEmpty && !isPasswordEmpty) {
                     //   // Perform your authentication logic here
@@ -317,10 +334,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Row(children: [
                   Expanded(
-                    child: new Container(
+                    child:  Container(
                       margin: EdgeInsets.only(left: 10.0.w, right: 20.0.w),
                       child: Divider(
-                        color: Colors.black,
+                        color: Colors.grey.shade400,
                         height: 36.h,
                       ),
                     ),
@@ -336,10 +353,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   Expanded(
-                    child: new Container(
+                    child:  Container(
                       margin: EdgeInsets.only(left: 20.0.w, right: 10.0.w),
                       child: Divider(
-                        color: Colors.black,
+                        color: Colors.grey.shade400,
                         height: 36.h,
                       ),
                     ),

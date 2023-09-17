@@ -14,7 +14,13 @@ class HiveManager {
   }
 
   String getLanguage() {
-    return boxSetting.get(_language);
+    final language = boxSetting.get(_language) as String?;
+    return language ?? "en"; // Provide a default value if language is null
+  }
+
+  String getCustomerID() {
+    final customerID = boxSetting.get(_customerid) as String?;
+    return customerID ?? ""; // Provide a default value if customerID is null
   }
 
   void updateLanguage(String languageCode) {
@@ -31,9 +37,6 @@ class HiveManager {
     return boxSetting.containsKey(_customerid);
   }
 
-  String getCustomerID() {
-    return boxSetting.get(_customerid);
-  }
 
   void updateCustomerID(String customerID) {
     return boxAddValue({_customerid: customerID}, boxSetting);

@@ -24,7 +24,7 @@ class _UnsuccessfulLoginAlertState extends State<UnsuccessfulLoginAlert> {
           ), // Border color
         ),
         content: Container(
-          height: 234.h,
+          height: 235.h,
           width: 340.w,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 23.h),

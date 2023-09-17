@@ -21,8 +21,6 @@ class ApiUserid {
 
     final response = await apiService.post<Map<String, dynamic>>(request);
 
-    print(response);
-
     // api connection fail, not 200
     if ((response == null) || (response['Status'] == "Error")) {
       return <String, dynamic>{

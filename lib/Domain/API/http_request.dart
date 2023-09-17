@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
@@ -6,7 +5,8 @@ import 'package:crypto/crypto.dart';
 const String httpOK = "Success";
 
 class HttpApi {
-  final String baseUrl = 'http://www.peppaca.website/api_v2';
+  final String baseUrl =
+      'http://www.peppaca.website/api_v2/index/account'; // Replace with your API endpoint
 
   Future<T?> get<T>(String endpoint) async {
     final response = await http.get(Uri.parse('$baseUrl/$endpoint'));
@@ -36,7 +36,8 @@ class HttpApi {
 
   Map<String, dynamic> getRequest(String action, String secretKey,
       String customerid, int apiVersion, Map<String, dynamic> params) {
-    String signature = _calculateHMAC(action, secretKey);
+    String secret = secretKey == '' ? customerid : secretKey;
+    String signature = _calculateHMAC(action, secret);
 
     return {
       "Action": action,
@@ -61,3 +62,4 @@ class HttpApi {
     return encoded;
   }
 }
+

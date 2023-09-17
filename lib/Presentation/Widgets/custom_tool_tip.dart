@@ -22,10 +22,11 @@
 //       appBar: AppBar(
 //         title: Text('Super Tooltip Example'),
 //       ),
-//       body: Center(
-//           child: GestureDetector(
+//       body: Column(
+//         children: [
+//
+//           GestureDetector(
 //             onTap: () {
-//               _controller.showTooltip();
 //             },
 //             child: SuperTooltip(
 //               borderColor: Color(0xFFC2612C),
@@ -172,6 +173,7 @@
 //               ),
 //             ),
 //           ),
+//         ],
 //       ),
 //     );
 //   }

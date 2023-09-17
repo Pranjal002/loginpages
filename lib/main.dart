@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:loginpage/Domain/model/hive_constants.dart';
 import 'package:loginpage/Presentation/Screens/login_page.dart';
 import 'package:loginpage/Presentation/Widgets/custom_tool_tip.dart';
+import 'package:hive/hive.dart';
+Future<void> initializeHive() async {
+  // Open the 'Setting' box (you can replace 'Setting' with the desired box name)
+  boxSetting = await Hive.openBox(settingBox);
+}
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await initializeHive();
 
-void main() {
   runApp(const MyApp());
 }
 

@@ -14,14 +14,16 @@ class ApiSignin {
       String userName, String passWord) async {
     final Map<String, dynamic> queryParams = {
       'Email': userName,
+      'CustomerID': '',
       'Password': passWord,
       'Language': hiveManager.getLanguage(),
     };
 
-    Map<String, dynamic> request = apiService.getRequest(
-        "SignIn", queryParams['Password'], '', 2, queryParams);
+    Map<String, dynamic> request = apiService.getRequest("SignIn",
+        queryParams['Password'], queryParams['CustomerID'], 2, queryParams);
 
     final response = await apiService.post<Map<String, dynamic>>(request);
+    print(response);
 
     // api connection fail, not 200
     if ((response == null) || (response['Status'] == "Error")) {
@@ -87,16 +89,48 @@ class ApiSignin {
       String userName, String passWord) async {
     final Map<String, dynamic> queryParams = {
       'Email': userName,
+      'CustomerID': hiveManager.getCustomerID(),
       'Password': passWord,
       'Language': hiveManager.getLanguage(),
     };
 
     Map<String, dynamic> request = apiService.getRequest("ResetPassword",
-        queryParams['Password'], hiveManager.getCustomerID(), 2, queryParams);
+        queryParams['Password'], queryParams['CustomerID'], 2, queryParams);
 
     final response = await apiService.post<Map<String, dynamic>>(request);
 
     //print(jsonEncode(response));
+
+    // api connection fail, not 200
+    if (response == null) {
+      return <String, dynamic>{
+        "httpStatus": "Fatal",
+        "httpComment": "Not Found !"
+      };
+    } else {
+      return <String, dynamic>{
+        "httpStatus": response['Status'],
+        "httpComment": response['Comment']
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> setMobileLocked(
+      String email, DateTime lockedDate) async {
+    final Map<String, dynamic> queryParams = {
+      'Email': email,
+      'LockedDate': lockedDate.toIso8601String(),
+      'CustomerID': hiveManager.getCustomerID(),
+      'Password': '',
+      'Language': hiveManager.getLanguage(),
+    };
+
+    Map<String, dynamic> request = apiService.getRequest("SetMobileLocked",
+        queryParams['Password'], queryParams['CustomerID'], 2, queryParams);
+
+    final response = await apiService.post<Map<String, dynamic>>(request);
+
+//    print(jsonEncode(response));
 
     // api connection fail, not 200
     if (response == null) {
