@@ -396,30 +396,30 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                     ),
                     SizedBox(
-                      height: 5.h,
+                      height: 25.h,
                     ),
-                    if (!isNewPasswordEmpty)
-                      Container(
-                        height: 20.h,
-                        child: Visibility(
-                          visible: !isNewPasswordEmpty,
-                          child: Text(
-                            'Password can’t be blank.',
-                            style: TextStyle(
-                              color: Color(0xFFEA4335),
-                              fontSize: 12.sp,
-                              fontFamily: 'Open Sans',
-                              fontWeight: FontWeight.w400,
-                              height: 0,
-                            ),
-                          ),
-                        ),
-                      )
-                    else
-                      SizedBox(height: 20.h),
-                    SizedBox(
-                      height: 5.h,
-                    ),
+                    // if (!isNewPasswordEmpty)
+                    //   Container(
+                    //     height: 20.h,
+                    //     child: Visibility(
+                    //       visible: !isNewPasswordEmpty,
+                    //       child: Text(
+                    //         'Password can’t be blank.',
+                    //         style: TextStyle(
+                    //           color: Color(0xFFEA4335),
+                    //           fontSize: 12.sp,
+                    //           fontFamily: 'Open Sans',
+                    //           fontWeight: FontWeight.w400,
+                    //           height: 0,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   )
+                    // else
+                    //   SizedBox(height: 20.h),
+                    // SizedBox(
+                    //   height: 5.h,
+                    // ),
                     Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.r),
@@ -559,11 +559,11 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 isConfirmPasswordmatch = false;
                               });
                           }
-                          // showDialog(
-                          //     context: context,
-                          //     builder: (BuildContext context) {
-                          //       return SecurityAlertBox();
-                          //     });
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SecurityAlertBox();
+                              });
                         },
                         child: Container(
                           width: 205.w,
